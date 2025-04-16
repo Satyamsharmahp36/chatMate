@@ -10,7 +10,7 @@ const ContributionForm = ({
   onContriUpdated
 }) => {
   const [name, setName] = useState(() => {
-    return sessionStorage.getItem('userName') || '';
+    return sessionStorage.getItem('presentUserName') || '';
   });
   const [question, setQuestion] = useState(lastQuestion || '');
   const [answer, setAnswer] = useState('');
@@ -30,7 +30,7 @@ const ContributionForm = ({
     
     setIsSubmitting(true);
     try {
-      const result = await apiService.submitContribution(name, question, answer, localStorage.getItem('verifiedUserId'));
+      const result = await apiService.submitContribution(name, question, answer, sessionStorage.getItem('userName'));
       setSubmitMessage(result.message);
       setSubmitStatus('success');
       setTimeout(() => {
@@ -110,10 +110,10 @@ const ContributionForm = ({
                     onChange={(e) => setName(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-800 text-white shadow-inner"
                     placeholder="Enter your name"
-                    disabled={sessionStorage.getItem('userName')}
+                    disabled={sessionStorage.getItem('presentUserName')}
                   />
                 </div>
-                {sessionStorage.getItem('userName') && (
+                {sessionStorage.getItem('presentUserName') && (
                   <p className="text-xs text-gray-400 mt-1 ml-2">Name auto-filled from your homepage entry</p>
                 )}
               </div>

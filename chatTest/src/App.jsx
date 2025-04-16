@@ -30,7 +30,7 @@ const UserChatRoute = ({ onUserVerified }) => {
     };
     
     fetchUserData();
-  }, [username, onUserVerified]);
+  }, [username]);
   
   if (loading) {
     return (

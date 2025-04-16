@@ -82,7 +82,7 @@ const AdminModal = ({ isOpen, onClose, onPromptUpdated, password, userData }) =>
   const updatePrompt = async () => {
     setIsLoading(true);
     try {
-      await apiService.updatePrompt(promptContent, localStorage.getItem('verifiedUserId'));
+      await apiService.updatePrompt(promptContent, sessionStorage.getItem('userName'));
       setSuccessMessage('Prompt updated successfully');
       setTimeout(() => setSuccessMessage(''), 3000);
       if (typeof onPromptUpdated === 'function') {
@@ -99,7 +99,7 @@ const AdminModal = ({ isOpen, onClose, onPromptUpdated, password, userData }) =>
   const updateResponseStyle = async () => {
     setIsLoading(true);
     try {
-      await apiService.updateUserPrompt(responseStyleContent, localStorage.getItem('verifiedUserId'));
+      await apiService.updateUserPrompt(responseStyleContent, sessionStorage.getItem('userName'));
       
       setSuccessMessage('Response style updated successfully');
       setTimeout(() => setSuccessMessage(''), 3000);
@@ -119,7 +119,7 @@ const AdminModal = ({ isOpen, onClose, onPromptUpdated, password, userData }) =>
     if (window.confirm('Are you sure you want to clear the prompt?')) {
       setIsLoading(true);
       try {
-        await apiService.clearPrompt(localStorage.getItem('verifiedUserId'));
+        await apiService.clearPrompt(sessionStorage.getItem('userName'));
         setPromptContent('');
         setSuccessMessage('Prompt cleared successfully');
         setTimeout(() => setSuccessMessage(''), 3000);
@@ -139,7 +139,7 @@ const AdminModal = ({ isOpen, onClose, onPromptUpdated, password, userData }) =>
     if (window.confirm('Are you sure you want to clear the response style?')) {
       setIsLoading(true);
       try {
-        await apiService.clearUserPrompt(localStorage.getItem('verifiedUserId'));
+        await apiService.clearUserPrompt(sessionStorage.getItem('userName'));
         setResponseStyleContent('');
         setSuccessMessage('Response style cleared successfully');
         setTimeout(() => setSuccessMessage(''), 3000);
@@ -159,7 +159,7 @@ const AdminModal = ({ isOpen, onClose, onPromptUpdated, password, userData }) =>
   const updateContributionStatuse = async (id, status) => {
     setIsLoading(true);
     try {
-      await apiService.updateContributionStatus(id, status, localStorage.getItem('verifiedUserId'));
+      await apiService.updateContributionStatus(id, status, sessionStorage.getItem('userName'));
       if (typeof onPromptUpdated === 'function') {
         onPromptUpdated();
       }
@@ -193,7 +193,7 @@ const AdminModal = ({ isOpen, onClose, onPromptUpdated, password, userData }) =>
   const refreshAllData = async () => {
     setRefreshing(true);
     try {
-      const userId = localStorage.getItem('verifiedUserId');
+      const userId = sessionStorage.getItem('userName');
       const refreshedData = await apiService.getUserData(userId);
       
       if (refreshedData) {

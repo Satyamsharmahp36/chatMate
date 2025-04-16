@@ -221,7 +221,7 @@ const HomePage = ({ userData, onLogout }) => {
 
   const refetchUserData = async () => {
     try {
-      const savedUsername = localStorage.getItem('presentUserName') || sessionStorage.getItem('presentUserName');
+      const savedUsername = localStorage.getItem('userName') || sessionStorage.getItem('userName');
       
       if (!savedUsername) {
         throw new Error('No username found');
